@@ -17,6 +17,14 @@
 		<ng.version>0.1.1</ng.version>
 	</properties>
 
+	<!-- wonder-slim and wo-adaptor-jetty (and WebObjects itself) are published to the WOCommunity repository; ng-objects and vermilingua come from Maven Central -->
+	<repositories>
+		<repository>
+			<id>wocommunity</id>
+			<url>https://maven.wocommunity.org/content/groups/public</url>
+		</repository>
+	</repositories>
+
 	<build>
 		<finalName>${project.artifactId}</finalName>
 		<plugins>
