@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>is.rebbi</groupId>
+	<artifactId>wong-hybrid</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<name>wong-hybrid</name>
+	<description>A minimal application serving WebObjects and ng-objects side by side from one Jetty server</description>
+
+	<!-- "woapplication" packaging is provided by vermilingua and builds a WO application bundle from the standard WO project layout (see build.properties) -->
+	<packaging>woapplication</packaging>
+
+	<properties>
+		<maven.compiler.release>25</maven.compiler.release>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<wonder.version>8.0.4</wonder.version>
+		<ng.version>0.1.1</ng.version>
+	</properties>
+
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>is.rebbi</groupId>
+				<artifactId>vermilingua-maven-plugin</artifactId>
+				<version>1.1.8</version>
+				<extensions>true</extensions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<!-- The WebObjects side: wonder-slim's ERExtensions (which pulls in WebObjects itself) and its logging bridge -->
+		<dependency>
+			<groupId>is.rebbi.slim</groupId>
+			<artifactId>ERExtensions</artifactId>
+			<version>${wonder.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>is.rebbi.slim</groupId>
+			<artifactId>ERLoggingReload4j</artifactId>
+			<version>${wonder.version}</version>
+		</dependency>
+
+		<!-- A Jetty-based WOAdaptor. This is what makes the hybrid possible: WO and ng-objects can share one Jetty server. Not released yet, so a snapshot for now -->
+		<dependency>
+			<groupId>is.rebbi</groupId>
+			<artifactId>wo-adaptor-jetty</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<!-- The ng-objects side: the framework and its Jetty handler -->
+		<dependency>
+			<groupId>is.rebbi.ng</groupId>
+			<artifactId>ng-appserver</artifactId>
+			<version>${ng.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>is.rebbi.ng</groupId>
+			<artifactId>ng-adaptor-jetty</artifactId>
+			<version>${ng.version}</version>
+		</dependency>
+	</dependencies>
+</project>
