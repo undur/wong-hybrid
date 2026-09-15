@@ -42,11 +42,11 @@
 			<version>${wonder.version}</version>
 		</dependency>
 
-		<!-- A Jetty-based WOAdaptor. This is what makes the hybrid possible: WO and ng-objects can share one Jetty server. Not released yet, so a snapshot for now -->
+		<!-- A Jetty-based WOAdaptor. This is what makes the hybrid possible: WO and ng-objects can share one Jetty server -->
 		<dependency>
 			<groupId>is.rebbi</groupId>
 			<artifactId>wo-adaptor-jetty</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.9.0</version>
 		</dependency>
 
 		<!-- The ng-objects side: the framework and its Jetty handler -->

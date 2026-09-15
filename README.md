@@ -50,7 +50,7 @@ src/main/woresources/Properties           WO properties (adaptor, logging)
 
 ## Running it
 
-You need Java 25 and Maven. wonder-slim and ng-objects are used at released versions. [wo-adaptor-jetty](https://github.com/undur/wo-adaptor-jetty) has no release yet, so it is a snapshot that you build and install from source first. The WebObjects jars must come from your local repo or `maven.wocommunity.org`.
+You need Java 25 and Maven. All dependencies are released versions, so nothing needs to be built from source. The WebObjects jars must come from your local repo or `maven.wocommunity.org`.
 
 Build and run:
 
