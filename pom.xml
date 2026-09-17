@@ -54,7 +54,7 @@
 		<dependency>
 			<groupId>is.rebbi</groupId>
 			<artifactId>wo-adaptor-jetty</artifactId>
-			<version>0.9.0</version>
+			<version>0.10.0</version>
 		</dependency>
 
 		<!-- The ng-objects side: the framework and its Jetty handler -->
