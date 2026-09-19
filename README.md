@@ -60,4 +60,4 @@ mvn vermilingua:run
 
 This has vermilingua build the WO application bundle in `target/` and start it through the bundle's own launch script, on port 1200 by default. Arguments for the application go in `run.args`, for example `mvn vermilingua:run -Drun.args="-WOPort 1201"`. Then open <http://localhost:1200/> and follow the link to the ng-objects page. Ctrl-C stops it.
 
-In Eclipse, import it with **File → Import → Existing Maven Projects** and launch `wong.Application` the way you would launch any WO application. The `WOAdaptor=WOAdaptorJetty` property that selects the Jetty adaptor is set in `src/main/woresources/Properties`, so no launch argument is needed for it.
+In Eclipse, import it with **File → Import → Existing Maven Projects** and launch `wong.Application` the way you would launch any WO application.
