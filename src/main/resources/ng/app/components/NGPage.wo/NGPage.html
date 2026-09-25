@@ -94,17 +94,17 @@
 	<p>The link below invokes a component action over Ajax. Only the boxed part of the page is re-rendered and swapped in.</p>
 	<p class="action"><wo:AjaxUpdateLink action="$bump" updateContainerID="clicks">Click me</wo:AjaxUpdateLink></p>
 	<wo:AjaxUpdateContainer id="clicks" class="box">
-		<wo:NGConditional condition="$hasBeenClicked">
-			<p class="result">Clicked <wo:NGString value="$clickCount" /> <wo:NGString value="$clickWord" />, last at <wo:NGString value="$lastClicked" />.</p>
-		</wo:NGConditional>
-		<wo:NGConditional condition="$hasBeenClicked" negate="$true">
+		<wo:if condition="$hasBeenClicked">
+			<p class="result">Clicked <wo:str value="$clickCount" /> <wo:str value="$clickWord" />, last at <wo:str value="$lastClicked" />.</p>
+		</wo:if>
+		<wo:if condition="$hasBeenClicked" negate="$true">
 			<p class="hint">Nothing clicked yet.</p>
-		</wo:NGConditional>
+		</wo:if>
 		<dl>
-			<dt>Component</dt><dd><wo:NGString value="$name" /></dd>
-			<dt>Method</dt><dd><wo:NGString value="$requestMethod" /></dd>
-			<dt>URI</dt><dd><wo:NGString value="$requestURI" /></dd>
-			<dt>Rendered</dt><dd><wo:NGString value="$renderedAt" /></dd>
+			<dt>Component</dt><dd><wo:str value="$name" /></dd>
+			<dt>Method</dt><dd><wo:str value="$requestMethod" /></dd>
+			<dt>URI</dt><dd><wo:str value="$requestURI" /></dd>
+			<dt>Rendered</dt><dd><wo:str value="$renderedAt" /></dd>
 		</dl>
 	</wo:AjaxUpdateContainer>
 	<p class="other">Back to the page <a href="/">served by WebObjects ←</a></p>
