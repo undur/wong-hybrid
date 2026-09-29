@@ -44,11 +44,6 @@
 			<artifactId>ERExtensions</artifactId>
 			<version>${wonder.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>is.rebbi.slim</groupId>
-			<artifactId>ERLoggingReload4j</artifactId>
-			<version>${wonder.version}</version>
-		</dependency>
 
 		<!-- A Jetty-based WOAdaptor. This is what makes the hybrid possible: WO and ng-objects can share one Jetty server -->
 		<dependency>

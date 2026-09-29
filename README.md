@@ -45,7 +45,7 @@ src/main/components/WOPage.wo/         The WO page served at /
 src/main/java/wong/ng/NGHybridApplication.java   The ng-objects application and its routes
 src/main/java/wong/ng/components/NGPage.java
 src/main/resources/ng/app/components/NGPage.wo/  The ng-objects page served at /ng/
-src/main/woresources/Properties           WO properties (adaptor, logging)
+src/main/woresources/Properties           WO properties (ng-objects reads nothing from it)
 ```
 
 ## Running it
