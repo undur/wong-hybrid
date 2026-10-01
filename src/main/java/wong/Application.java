@@ -31,9 +31,10 @@ import wong.ng.NGHybridApplication;
  *   2. The WO handler goes first. It converts the request to a WORequest and dispatches it through WO as usual.
  *      If WO has an answer (a registered request handler key such as /wo/ or /wr/, or a mapped route like "/"),
  *      the WO response is sent and we're done.
- *   3. If WO's route table has no route for the URL, its NotFoundRouteHandler marks the 404 response as
- *      "unhandled" (see RouteTable.UNHANDLED_RESPONSE_KEY). The WO handler recognises the mark, discards the
- *      response and returns false to Jetty, which means "I didn't handle this, try the next handler".
+ *   3. If nothing in WO's route table answers the URL, the route table passes the request on: its not found handler
+ *      here is RouteTable.PassOnRouteHandler, which declines, so the answer is a bare 404 marked "unhandled" (see
+ *      RouteTable.UNHANDLED_RESPONSE_KEY). The WO handler recognises the mark, discards the response and returns
+ *      false to Jetty, which means "I didn't handle this, try the next handler".
  *   4. The ng-objects handler gets the request next and dispatches it through NGHybridApplication's routes.
  *
  * So the rule of thumb is: WO answers everything it knows about, ng-objects answers what is left.
@@ -57,8 +58,10 @@ public class Application extends ERXApplication implements JettyServerProvider {
 		// WO may find that one first and fail. Registering our class under the name settles it.
 		_NSUtilities.setClassForName( Session.class, "Session" );
 
-		// WO's routes. Anything not mapped here (and not a registered WO request handler key) falls through to ng-objects.
+		// WO's routes. Anything not answered here (and not a registered WO request handler key) is passed on to ng-objects,
+		// in development too, instead of WO's own 404 pages.
 		RouteTable.defaultRouteTable().map( "/", WOPage.class );
+		RouteTable.defaultRouteTable().setNotFoundRouteHandler( new RouteTable.PassOnRouteHandler() );
 	}
 
 	/**
