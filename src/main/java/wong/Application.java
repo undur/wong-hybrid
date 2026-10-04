@@ -11,7 +11,8 @@ import com.webobjects.appserver.WOAdaptorJetty.JettyServerProvider;
 import com.webobjects.foundation._NSUtilities;
 
 import er.extensions.appserver.ERXApplication;
-import er.extensions.routes.RouteTable;
+import er.extensions.routing.ERXRouter;
+import er.extensions.routing.RouteHandler;
 import ng.adaptor.jetty.NGAdaptorJetty;
 import ng.appserver.NGApplication;
 import ng.appserver.properties.NGProperties;
@@ -31,9 +32,8 @@ import wong.ng.NGHybridApplication;
  *   2. The WO handler goes first. It converts the request to a WORequest and dispatches it through WO as usual.
  *      If WO has an answer (a registered request handler key such as /wo/ or /wr/, or a mapped route like "/"),
  *      the WO response is sent and we're done.
- *   3. If nothing in WO's route table answers the URL, the route table passes the request on: its not found handler
- *      here is RouteTable.PassOnRouteHandler, which declines, so the answer is a bare 404 marked "unhandled" (see
- *      RouteTable.UNHANDLED_RESPONSE_KEY). The WO handler recognises the mark, discards the response and returns
+ *   3. If none of WO's routes answers the URL, the router passes the request on: its not found handler here
+ *      declines, so the answer is a bare 404 marked "unhandled" (see ERXRouter.UNHANDLED_RESPONSE_KEY). The WO handler recognises the mark, discards the response and returns
  *      false to Jetty, which means "I didn't handle this, try the next handler".
  *   4. The ng-objects handler gets the request next and dispatches it through NGHybridApplication's routes.
  *
@@ -60,8 +60,10 @@ public class Application extends ERXApplication implements JettyServerProvider {
 
 		// WO's routes. Anything not answered here (and not a registered WO request handler key) is passed on to ng-objects,
 		// in development too, instead of WO's own 404 pages.
-		RouteTable.defaultRouteTable().map( "/", WOPage.class );
-		RouteTable.defaultRouteTable().setNotFoundRouteHandler( new RouteTable.PassOnRouteHandler() );
+		ERXRouter.declare( routes -> {
+			routes.map( "/", WOPage.class );
+			routes.notFound( ri -> RouteHandler.DECLINED );
+		} );
 	}
 
 	/**
